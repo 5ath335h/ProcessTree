@@ -1,0 +1,117 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "black"}, "id": "4688", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png", "label": "4688", "shape": "image", "title": "A new process has been created"}, {"font": {"color": "black"}, "id": "mspaint.exe_0x1212", "label": "mspaint.exe_0x1212", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\mapaint.exe c:\\users\\user1da\\Pictures\\sunrise.jpg\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "svchost.exe_0x12f8", "label": "svchost.exe_0x12f8", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\system32\\svchost.exe -k UnistackSvcGroup -s WpnUserService\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "userinit.exe_0x36d4", "label": "userinit.exe_0x36d4", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\system32\\userinit.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "explorer.exe_0x5328", "label": "explorer.exe_0x5328", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\Explorer.EXE\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "mobsync.exe_0x6a78", "label": "mobsync.exe_0x6a78", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\mobsync.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "dllhost.exe_0x2390", "label": "dllhost.exe_0x2390", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\system32\\DllHost.exe /Processid:{900020D7-0000-0000-0000-00\u003c/br\u003e98767546}\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "RuntimeBroker.exe_0x7a3c", "label": "RuntimeBroker.exe_0x7a3c", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\RuntimeBroker.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "mstsc.exe_0x3fac", "label": "mstsc.exe_0x3fac", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\mstsc.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "verify.exe_0x2694", "label": "verify.exe_0x2694", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\verify.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "notepad.exe_0x60f0", "label": "notepad.exe_0x60f0", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\notepad.exe c:\\users\\user1da\\Desktop\\password.txt\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "snip.exe_0xdd8", "label": "snip.exe_0xdd8", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\snip.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "rdpinput.exe_0x2391", "label": "rdpinput.exe_0x2391", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\rdpinput.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "cmd.exe_0x1212", "label": "cmd.exe_0x1212", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\cmd.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "conhost.exe_0x36d5", "label": "conhost.exe_0x36d5", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\conhost.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "excel.exe_0x6058", "label": "excel.exe_0x6058", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Program Files\\office64\\excel.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "calc.exe_0x60f0", "label": "calc.exe_0x60f0", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\calc.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "efsui.exe_0x6a77", "label": "efsui.exe_0x6a77", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\efsui.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "taskhostw.exe_0x2694", "label": "taskhostw.exe_0x2694", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003etaskhostw.exe USER3\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "ShellExperienceHost.exe_0x7814", "label": "ShellExperienceHost.exe_0x7814", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\ShellExperienceHost.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "conhost.exe_0x1853", "label": "conhost.exe_0x1853", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\conhost.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "smartscreen.exe_0x0987", "label": "smartscreen.exe_0x0987", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\smartscreen.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "cmd.exe_0x9876", "label": "cmd.exe_0x9876", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\cmd.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "conhost.exe_0x7281", "label": "conhost.exe_0x7281", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\conhost.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "word.exe_0x1212", "label": "word.exe_0x1212", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Program Files\\office64\\word.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "cscript.exe_0x2694", "label": "cscript.exe_0x2694", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\cscript.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "conhost.exe_0x8889", "label": "conhost.exe_0x8889", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\conhost.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "svchost.exe_0x7be0", "label": "svchost.exe_0x7be0", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\system32\\svchost.exe -k UnistackSvcGroup -s CDPUserSvc\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "sihost.exe_0x3fad", "label": "sihost.exe_0x3fad", "shape": "dot", "title": "\u003cb\u003eAccountName: \u003c/b\u003eUSER1DA\u003cbr\u003e\u003cb\u003eCommandLine: \u003c/b\u003eC:\\Windows\\System32\\sihost.exe\u003cbr\u003e\u003cb\u003eTokenElevationType: \u003c/b\u003eType 3: Limited token with admin privileges removed\u003cbr\u003e"}, {"font": {"color": "black"}, "id": "services.exe_0x9173", "label": "services.exe_0x9173", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\services.exe"}, {"font": {"color": "black"}, "id": "winlogon.exe_0x6058", "label": "winlogon.exe_0x6058", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\winlogon.exe"}, {"font": {"color": "black"}, "id": "svchost.exe_0xac4", "label": "svchost.exe_0xac4", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\svchost.exe"}, {"font": {"color": "black"}, "id": "rdpclip.exe_0x4edc", "label": "rdpclip.exe_0x4edc", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\rdpclip.exe"}, {"font": {"color": "black"}, "id": "lsass.exe_0x198", "label": "lsass.exe_0x198", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\lsass.exe"}, {"font": {"color": "black"}, "id": "svchost.exe_0xfb8", "label": "svchost.exe_0xfb8", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\svchost.exe"}, {"font": {"color": "black"}, "id": "svchost.exe_0x16a4", "label": "svchost.exe_0x16a4", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\svchost.exe"}, {"font": {"color": "black"}, "id": "svchost.exe_0x6576", "label": "svchost.exe_0x6576", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\svchost.exe"}, {"font": {"color": "black"}, "id": "services.exe_0x214", "label": "services.exe_0x214", "shape": "dot", "title": "\u003cb\u003eLogonId: \u003c/b\u003e0x8783\u003cbr\u003e\u003cb\u003eAccountName: \u003c/b\u003eCONTOSO/USER1DA\u003cbr\u003e\u003cb\u003eProcessPath: \u003c/b\u003eC:\\Windows\\System32\\services.exe"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "4688", "to": "services.exe_0x9173"}, {"arrows": "to", "from": "4688", "to": "winlogon.exe_0x6058"}, {"arrows": "to", "from": "4688", "to": "svchost.exe_0xac4"}, {"arrows": "to", "from": "4688", "to": "rdpclip.exe_0x4edc"}, {"arrows": "to", "from": "4688", "to": "lsass.exe_0x198"}, {"arrows": "to", "from": "4688", "to": "svchost.exe_0xfb8"}, {"arrows": "to", "from": "4688", "to": "svchost.exe_0x16a4"}, {"arrows": "to", "from": "4688", "to": "svchost.exe_0x6576"}, {"arrows": "to", "from": "4688", "to": "services.exe_0x214"}, {"arrows": "to", "from": "explorer.exe_0x5328", "to": "mspaint.exe_0x1212"}, {"arrows": "to", "from": "services.exe_0x9173", "to": "svchost.exe_0x12f8"}, {"arrows": "to", "from": "explorer.exe_0x5328", "to": "mstsc.exe_0x3fac"}, {"arrows": "to", "from": "explorer.exe_0x5328", "to": "notepad.exe_0x60f0"}, {"arrows": "to", "from": "cmd.exe_0x1212", "to": "conhost.exe_0x1853"}, {"arrows": "to", "from": "cmd.exe_0x9876", "to": "conhost.exe_0x7281"}, {"arrows": "to", "from": "cmd.exe_0x1212", "to": "cmd.exe_0x9876"}, {"arrows": "to", "from": "explorer.exe_0x5328", "to": "cmd.exe_0x1212"}, {"arrows": "to", "from": "explorer.exe_0x5328", "to": "calc.exe_0x60f0"}, {"arrows": "to", "from": "cscript.exe_0x2694", "to": "conhost.exe_0x8889"}, {"arrows": "to", "from": "word.exe_0x1212", "to": "cscript.exe_0x2694"}, {"arrows": "to", "from": "explorer.exe_0x5328", "to": "word.exe_0x1212"}, {"arrows": "to", "from": "userinit.exe_0x36d4", "to": "explorer.exe_0x5328"}, {"arrows": "to", "from": "winlogon.exe_0x6058", "to": "userinit.exe_0x36d4"}, {"arrows": "to", "from": "svchost.exe_0xac4", "to": "mobsync.exe_0x6a78"}, {"arrows": "to", "from": "svchost.exe_0xac4", "to": "dllhost.exe_0x2390"}, {"arrows": "to", "from": "svchost.exe_0xac4", "to": "RuntimeBroker.exe_0x7a3c"}, {"arrows": "to", "from": "svchost.exe_0xac4", "to": "verify.exe_0x2694"}, {"arrows": "to", "from": "mspaint.exe_0x1212", "to": "snip.exe_0xdd8"}, {"arrows": "to", "from": "rdpclip.exe_0x4edc", "to": "rdpinput.exe_0x2391"}, {"arrows": "to", "from": "cmd.exe_0x1212", "to": "conhost.exe_0x36d5"}, {"arrows": "to", "from": "cmd.exe_0x1212", "to": "excel.exe_0x6058"}, {"arrows": "to", "from": "lsass.exe_0x198", "to": "efsui.exe_0x6a77"}, {"arrows": "to", "from": "svchost.exe_0xfb8", "to": "taskhostw.exe_0x2694"}, {"arrows": "to", "from": "svchost.exe_0x16a4", "to": "ShellExperienceHost.exe_0x7814"}, {"arrows": "to", "from": "svchost.exe_0x6576", "to": "smartscreen.exe_0x0987"}, {"arrows": "to", "from": "svchost.exe_0x7be0", "to": "sihost.exe_0x3fad"}, {"arrows": "to", "from": "services.exe_0x214", "to": "svchost.exe_0x7be0"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.08,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
