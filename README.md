@@ -5,7 +5,7 @@ This tool will take csv as an input and will display a displays a graphical repr
 
 **Author:** Satheesh Balaji
 
-**Twitter:** @sbc0d
+**Twitter:** https://twitter.com/sbc0d
 
 **LinkedIn:** https://www.linkedin.com/in/sb-c0d3
 
